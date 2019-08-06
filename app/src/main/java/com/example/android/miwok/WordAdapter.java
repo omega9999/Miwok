@@ -1,7 +1,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +22,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         View view = convertView;
-        if (convertView == null){
+        if (convertView == null) {
             // warning: attachToRoot must be false
-            view = LayoutInflater.from(getContext()).inflate(LIST_ITEM,parent, false);
+            Log.d(TAG, String.format("LayoutInflater for position %1$s", position));
+            view = LayoutInflater.from(getContext()).inflate(LIST_ITEM, parent, false);
         }
         TextView miwokWord = view.findViewById(R.id.miwok_text_view);
         TextView defaultWord = view.findViewById(R.id.default_text_view);
+
 
         final Word word = getItem(position);
         if (word != null) {
@@ -40,4 +42,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
     }
 
     private static final int LIST_ITEM = R.layout.list_item;
+
+    private static final String TAG = WordAdapter.class.getSimpleName();
 }
