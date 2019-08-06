@@ -2,6 +2,7 @@ package com.example.android.miwok;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,20 @@ public class WordAdapter extends ArrayAdapter<Word> {
             defaultWord.setText(word.getDefaultTranslation());
             miwokWord.setText(word.getMiwokTranslation());
         }
-        //view.setBackgroundColor(position % 2 == 0 ? Color.LTGRAY : Color.WHITE);
+
+        /*
+        * put a dark rectangle behind the view and set the view's opacity. This saves painting the rectangle when the view is 100% opaque.
+        * imageView.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+        * view.getBackground().setColorFilter(color, PorterDuff.Mode.DARKEN);
+        */
+        if (Boolean.FALSE) {// colori delle righe con varianti chiare/scure
+            int color = position % 2 == 0 ? Color.rgb(255, 0, 0) : Color.rgb(0, 255, 0);
+            view.setBackgroundColor(color);
+            defaultWord.setBackgroundColor(color);
+            miwokWord.setBackgroundColor(color);
+            defaultWord.getBackground().setColorFilter(Color.argb(20, 0, 0, 0), PorterDuff.Mode.DARKEN);
+            miwokWord.getBackground().setColorFilter(Color.argb(20, 0, 0, 0), PorterDuff.Mode.LIGHTEN);
+        }
 
         return view;
     }
