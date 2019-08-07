@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.widget.ListView;
@@ -31,6 +32,6 @@ public class PhrasesActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.list);
         //listView.setAdapter(adapter);
-        listView.setAdapter(new WordAdapter(this, words));
+        listView.setAdapter(new WordAdapter(this, words, R.color.category_phrases));
     }
 }

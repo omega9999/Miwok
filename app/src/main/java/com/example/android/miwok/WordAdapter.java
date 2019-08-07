@@ -17,8 +17,10 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 public class WordAdapter extends ArrayAdapter<Word> {
-    public WordAdapter(@NonNull final Context context, @NonNull final List<Word> objects) {
+    public WordAdapter(@NonNull final Context context, @NonNull final List<Word> objects, final int backgroundColorId) {
         super(context, LIST_ITEM, objects);
+         // ContextCompat.getColor()
+        this.mBackgroundColor = context.getResources().getColor(backgroundColorId);
     }
 
     @NonNull
@@ -46,7 +48,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
             }
         }
 
-        view.setBackgroundColor(view.getResources().getColor(R.color.category_numbers));
 
         /*
         * put a dark rectangle behind the view and set the view's opacity. This saves painting the rectangle when the view is 100% opaque.
@@ -69,14 +70,17 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView miwokWord = view.findViewById(R.id.miwok_text_view);
         TextView defaultWord = view.findViewById(R.id.default_text_view);
         ImageView imageView = view.findViewById(R.id.image);
+        ViewGroup viewGroup = view.findViewById(R.id.text_container);
 
         miwokWord.setText(null);
         defaultWord.setText(null);
         imageView.setImageResource(Word.NO_IMAGE_ID);
         imageView.setVisibility(View.GONE);
+        viewGroup.setBackgroundColor(this.mBackgroundColor);
     }
 
     private static final int LIST_ITEM = R.layout.list_item;
+    private final int mBackgroundColor;
 
     private static final String TAG = WordAdapter.class.getSimpleName();
 }
