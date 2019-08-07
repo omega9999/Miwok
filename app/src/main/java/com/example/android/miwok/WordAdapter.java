@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,17 +30,23 @@ public class WordAdapter extends ArrayAdapter<Word> {
             Log.d(TAG, String.format("LayoutInflater for position %1$s", position));
             view = LayoutInflater.from(getContext()).inflate(LIST_ITEM, parent, false);
         }
-        else{
-            clearView(view);
-        }
+        clearView(view);
+
         TextView miwokWord = view.findViewById(R.id.miwok_text_view);
         TextView defaultWord = view.findViewById(R.id.default_text_view);
+        ImageView imageView = view.findViewById(R.id.image);
 
         final Word word = getItem(position);
         if (word != null) {
             defaultWord.setText(word.getDefaultTranslation());
             miwokWord.setText(word.getMiwokTranslation());
+            if (word.hasImage()){
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setImageResource(word.getImageResourceId());
+            }
         }
+
+        view.setBackgroundColor(view.getResources().getColor(R.color.category_numbers));
 
         /*
         * put a dark rectangle behind the view and set the view's opacity. This saves painting the rectangle when the view is 100% opaque.
@@ -61,9 +68,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
     private void clearView(@NonNull final View view){
         TextView miwokWord = view.findViewById(R.id.miwok_text_view);
         TextView defaultWord = view.findViewById(R.id.default_text_view);
+        ImageView imageView = view.findViewById(R.id.image);
 
         miwokWord.setText(null);
         defaultWord.setText(null);
+        imageView.setImageResource(Word.NO_IMAGE_ID);
+        imageView.setVisibility(View.GONE);
     }
 
     private static final int LIST_ITEM = R.layout.list_item;

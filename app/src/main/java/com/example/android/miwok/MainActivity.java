@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void manageOnClick(@Nullable final View view) {
+
         if (view != null) {
             Intent intent = null;
             switch (view.getId()) {
@@ -65,6 +66,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
     }
 }
