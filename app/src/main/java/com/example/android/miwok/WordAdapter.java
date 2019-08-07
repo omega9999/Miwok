@@ -3,6 +3,7 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,12 +56,9 @@ public class WordAdapter extends ArrayAdapter<Word> {
         * view.getBackground().setColorFilter(color, PorterDuff.Mode.DARKEN);
         */
         if (Boolean.FALSE) {// colori delle righe con varianti chiare/scure
-            int color = position % 2 == 0 ? Color.rgb(255, 0, 0) : Color.rgb(0, 255, 0);
-            view.setBackgroundColor(color);
-            defaultWord.setBackgroundColor(color);
-            miwokWord.setBackgroundColor(color);
-            defaultWord.getBackground().setColorFilter(Color.argb(20, 0, 0, 0), PorterDuff.Mode.DARKEN);
-            miwokWord.getBackground().setColorFilter(Color.argb(20, 0, 0, 0), PorterDuff.Mode.LIGHTEN);
+            ViewGroup viewGroup = view.findViewById(R.id.text_container);
+            PorterDuff.Mode mode = position % 2 == 0 ? PorterDuff.Mode.DARKEN : PorterDuff.Mode.LIGHTEN;
+            viewGroup.getBackground().setColorFilter(Color.argb(80, 0, 0, 0), mode);
         }
 
         return view;
