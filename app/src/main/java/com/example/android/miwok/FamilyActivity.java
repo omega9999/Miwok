@@ -1,21 +1,11 @@
 package com.example.android.miwok;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.widget.ListView;
-
 import java.util.ArrayList;
 
-public class FamilyActivity extends AppCompatActivity {
+public class FamilyActivity extends GenericActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
-
-        // Create an array of words
+    protected ArrayList<Word> getWords() {
         ArrayList<Word> words = new ArrayList<>();
         words.add(new Word("father", "әpә", R.drawable.family_father, R.raw.family_father));
         words.add(new Word("mother", "әṭa", R.drawable.family_mother, R.raw.family_mother));
@@ -27,18 +17,13 @@ public class FamilyActivity extends AppCompatActivity {
         words.add(new Word("younger sister", "kolliti", R.drawable.family_younger_sister, R.raw.family_younger_sister));
         words.add(new Word("grandmother ", "ama", R.drawable.family_grandmother, R.raw.family_grandmother));
         words.add(new Word("grandfather", "paapa", R.drawable.family_grandfather, R.raw.family_grandfather));
-
-        // TODO https://developer.android.com/guide/topics/ui/layout/recyclerview.html
-
-        ListView listView = findViewById(R.id.list);
-        //listView.setAdapter(adapter);
-        listView.setAdapter(new WordAdapter(this, words, R.color.category_family));
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Word word = words.get(position);
-            MediaPlayer mediaPlayer = MediaPlayer.create(FamilyActivity.this, word.getAudioResourceId());
-            mediaPlayer.start();
-        });
-
+        return words;
     }
+
+    @Override
+    protected int getBackgroundColorId() {
+        return R.color.category_family;
+    }
+
+
 }

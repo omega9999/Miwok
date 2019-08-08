@@ -1,22 +1,11 @@
 package com.example.android.miwok;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.widget.ListView;
-
 import java.util.ArrayList;
 
-public class PhrasesActivity extends AppCompatActivity {
+public class PhrasesActivity extends GenericActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
-
-        // Create an array of words
+    protected ArrayList<Word> getWords() {
         ArrayList<Word> words = new ArrayList<>();
         words.add(new Word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
         words.add(new Word("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
@@ -28,18 +17,12 @@ public class PhrasesActivity extends AppCompatActivity {
         words.add(new Word("I’m coming.", "әәnәm", R.raw.phrase_im_coming));
         words.add(new Word("Let’s go.", "yoowutis", R.raw.phrase_lets_go));
         words.add(new Word("Come here.", "әnni'nem", R.raw.phrase_come_here));
-
-        // TODO https://developer.android.com/guide/topics/ui/layout/recyclerview.html
-
-        ListView listView = findViewById(R.id.list);
-        //listView.setAdapter(adapter);
-        listView.setAdapter(new WordAdapter(this, words, R.color.category_phrases));
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Word word = words.get(position);
-            MediaPlayer mediaPlayer = MediaPlayer.create(PhrasesActivity.this, word.getAudioResourceId());
-            mediaPlayer.start();
-        });
-
+        return words;
     }
+
+    @Override
+    protected int getBackgroundColorId() {
+        return R.color.category_phrases;
+    }
+
 }
