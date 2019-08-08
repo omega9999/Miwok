@@ -21,11 +21,11 @@ public abstract class GenericActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
         this.mContext = this;
-        this.mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        this.mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         ArrayList<Word> words = getWords();
         // TODO https://developer.android.com/guide/topics/ui/layout/recyclerview.html
-        ListView listView = findViewById(R.id.list);
+        final ListView listView = findViewById(R.id.list);
         listView.setAdapter(new WordAdapter(this, words, getBackgroundColorId()));
         listView.setOnItemClickListener((parent, view, position, id) -> {
             final Word word = words.get(position);
@@ -100,5 +100,6 @@ public abstract class GenericActivity extends AppCompatActivity {
     private final MyOnAudioFocusChangeListener mOnAudioFocusChangeListener = new MyOnAudioFocusChangeListener();
     // TODO https://www.tutorialspoint.com/android/android_audiomanager
     private AudioManager mAudioManager;
+
 
 }
