@@ -25,6 +25,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         this.mBackgroundColor = context.getResources().getColor(backgroundColorId);
     }
 
+    /*
+    https://developer.android.com/reference/android/media/MediaPlayer.html
+    */
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
@@ -36,6 +40,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }
         clearView(view);
 
+
+        ViewGroup viewGroup = view.findViewById(R.id.text_container);
         TextView miwokWord = view.findViewById(R.id.miwok_text_view);
         TextView defaultWord = view.findViewById(R.id.default_text_view);
         ImageView imageView = view.findViewById(R.id.image);
@@ -56,7 +62,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
          * imageView.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
          * view.getBackground().setColorFilter(color, PorterDuff.Mode.DARKEN);
          */
-        ViewGroup viewGroup = view.findViewById(R.id.text_container);
+
         Drawable drawable = viewGroup.getBackground();
         if (drawable != null) {
             final int alpha = 40;

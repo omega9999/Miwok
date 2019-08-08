@@ -7,14 +7,15 @@ public class Word {
 
     public static int NO_IMAGE_ID = 0;
 
-    public Word(@NonNull final String defaultTranslation, @NonNull  final String miwokTranslation) {
-        this(defaultTranslation,miwokTranslation, NO_IMAGE_ID);
+    public Word(@NonNull final String defaultTranslation, @NonNull  final String miwokTranslation, final int soundResourceId) {
+        this(defaultTranslation,miwokTranslation, NO_IMAGE_ID, soundResourceId);
     }
 
-    public Word(@NonNull final String defaultTranslation, @NonNull  final String miwokTranslation, final int imageResourceId) {
+    public Word(@NonNull final String defaultTranslation, @NonNull  final String miwokTranslation, final int imageResourceId, final int soundResourceId) {
         this.mMiwokTranslation = miwokTranslation;
         this.mDefaultTranslation = defaultTranslation;
         this.mImageResourceId = imageResourceId;
+        this.mAudioResourceId = soundResourceId;
     }
 
     @NonNull
@@ -60,9 +61,22 @@ public class Word {
         return getImageResourceId() != NO_IMAGE_ID;
     }
 
+    @CheckResult
+    public int getAudioResourceId() {
+        return this.mAudioResourceId;
+    }
+
+    @NonNull
+    @CheckResult
+    public Word setAudioResourceId(final int soundResourceId) {
+        this.mAudioResourceId = soundResourceId;
+        return this;
+    }
+
     private String mMiwokTranslation;
     private String mDefaultTranslation;
     private int mImageResourceId;
+    private int mAudioResourceId;
 
     private static final String TAG = Word.class.getSimpleName();
 }
