@@ -2,7 +2,7 @@ package com.example.android.miwok;
 
 import java.util.ArrayList;
 
-public class ColorsActivity extends GenericActivity {
+public class ColorsFragment extends GenericFragment {
 
     @Override
     protected ArrayList<Word> getWords() {

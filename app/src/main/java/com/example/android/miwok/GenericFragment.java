@@ -4,29 +4,31 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public abstract class GenericActivity extends AppCompatActivity {
+public abstract class GenericFragment extends Fragment {
 
-    protected abstract ArrayList<Word> getWords();
 
-    protected abstract int getBackgroundColorId();
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
-        this.mContext = this;
-        this.mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.word_list, container, false);
+        this.mContext = getContext();
+        this.mAudioManager = (AudioManager) this.mContext.getSystemService(Context.AUDIO_SERVICE);
 
         ArrayList<Word> words = getWords();
         // TODO https://developer.android.com/guide/topics/ui/layout/recyclerview.html
-        final ListView listView = findViewById(R.id.list);
-        listView.setAdapter(new WordAdapter(this, words, getBackgroundColorId()));
+        final ListView listView = root.findViewById(R.id.list);
+        listView.setAdapter(new WordAdapter(this.mContext, words, getBackgroundColorId()));
         listView.setOnItemClickListener((parent, view, position, id) -> {
             final Word word = words.get(position);
             releaseMediaPlayer();
@@ -37,32 +39,43 @@ public abstract class GenericActivity extends AppCompatActivity {
                 this.mMediaPlayer.setOnCompletionListener(mp -> releaseMediaPlayer());
             }
         });
+        return root;
+
+    }
+
+    protected abstract ArrayList<Word> getWords();
+
+    protected abstract int getBackgroundColorId();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         releaseMediaPlayer();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
     }
 

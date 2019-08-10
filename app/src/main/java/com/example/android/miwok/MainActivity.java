@@ -1,18 +1,24 @@
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
 
 // TODO see https://pttrns.com/android-patterns?scid=31
 // TODO see global action https://developer.android.com/guide/navigation/navigation-design-graph
 // TODO see https://developer.android.com/guide/navigation
 // TODO see https://www.youtube.com/watch?v=Y0Cs2MQxyIs
+// TODO see tabs and ViewPager https://www.youtube.com/watch?v=zQekzaAgIlQ
+// TODO see Android Development Patterns https://www.youtube.com/playlist?list=PLWz5rJ2EKKc-lJo_RGGXL2Psr8vVCTWjM
+// TODO see fragment guide http://developer.android.com/guide/components/fragments.html
+// TODO see fragment jetpack (build a dynamic UI with Fragments) https://developer.android.com/guide/components/fragments
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,53 +29,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView numbers = findViewById(R.id.numbers);
-        numbers.setOnClickListener(view -> {
-            Log.d(TAG, "Click on numbers");
-            manageOnClick(view);
-        });
-        final TextView colors = findViewById(R.id.colors);
-        colors.setOnClickListener(view -> {
-            Log.d(TAG, "Click on colors");
-            manageOnClick(view);
-        });
-        final TextView family = findViewById(R.id.family);
-        family.setOnClickListener(view -> {
-            Log.d(TAG, "Click on family");
-            manageOnClick(view);
-        });
-        final TextView phrases = findViewById(R.id.phrases);
-        phrases.setOnClickListener(view -> {
-            Log.d(TAG, "Click on phrases");
-            manageOnClick(view);
-        });
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        // Create an adapter that knows which fragment should be shown on each page
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
     }
 
 
-    public void manageOnClick(@Nullable final View view) {
 
-        if (view != null) {
-            Intent intent = null;
-            switch (view.getId()) {
-                case R.id.numbers:
-                    intent = new Intent(this, NumbersActivity.class);
-                    break;
-                case R.id.colors:
-                    intent = new Intent(this, ColorsActivity.class);
-                    break;
-                case R.id.family:
-                    intent = new Intent(this, FamilyActivity.class);
-                    break;
-                case R.id.phrases:
-                    intent = new Intent(this, PhrasesActivity.class);
-                    break;
-            }
-            if (intent != null) {
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                }
 
-            }
+    private class SimpleFragmentPagerAdapter extends FragmentPagerAdapter{
+        SimpleFragmentPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+            this.mFragments = new ArrayList<>();
+            this.mFragments.add(new NumbersFragment());
+            this.mFragments.add(new ColorsFragment());
+            this.mFragments.add(new FamilyFragment());
+            this.mFragments.add(new PhrasesFragment());
         }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return this.mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.mFragments.size();
+        }
+
+        private final ArrayList<Fragment> mFragments;
     }
 }
