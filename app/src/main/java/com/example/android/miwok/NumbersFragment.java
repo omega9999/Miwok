@@ -25,4 +25,9 @@ public class NumbersFragment extends GenericFragment {
         return R.color.category_numbers;
     }
 
+    @Override
+    public int getTitleTabId() {
+        return R.string.category_numbers;
+    }
+
 }

@@ -47,6 +47,8 @@ public abstract class GenericFragment extends Fragment {
 
     protected abstract int getBackgroundColorId();
 
+    public abstract int getTitleTabId();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

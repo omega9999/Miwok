@@ -22,4 +22,9 @@ public class ColorsFragment extends GenericFragment {
     protected int getBackgroundColorId() {
         return R.color.category_colors;
     }
+
+    @Override
+    public int getTitleTabId() {
+        return R.string.category_colors;
+    }
 }

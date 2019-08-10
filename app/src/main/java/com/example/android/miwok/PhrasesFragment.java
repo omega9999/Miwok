@@ -25,4 +25,9 @@ public class PhrasesFragment extends GenericFragment {
         return R.color.category_phrases;
     }
 
+    @Override
+    public int getTitleTabId() {
+        return R.string.category_phrases;
+    }
+
 }

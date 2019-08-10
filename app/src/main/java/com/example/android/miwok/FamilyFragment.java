@@ -25,5 +25,9 @@ public class FamilyFragment extends GenericFragment {
         return R.color.category_family;
     }
 
+    @Override
+    public int getTitleTabId() {
+        return R.string.category_family;
+    }
 
 }
