@@ -9,6 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+// TODO see https://pttrns.com/android-patterns?scid=31
+// TODO see global action https://developer.android.com/guide/navigation/navigation-design-graph
+// TODO see https://developer.android.com/guide/navigation
+// TODO see https://www.youtube.com/watch?v=Y0Cs2MQxyIs
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
