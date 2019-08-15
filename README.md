@@ -22,3 +22,6 @@ Altri TODO
 // TODO see global action https://developer.android.com/guide/navigation/navigation-design-graph
 // TODO see https://developer.android.com/guide/navigation
 // TODO see https://www.youtube.com/watch?v=Y0Cs2MQxyIs
+
+Progetti come esercizio:
+Tour guide app: https://review.udacity.com/#!/rubrics/161/view
