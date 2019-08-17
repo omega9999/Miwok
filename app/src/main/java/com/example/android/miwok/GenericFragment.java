@@ -30,6 +30,7 @@ public abstract class GenericFragment extends Fragment {
         final ListView listView = root.findViewById(R.id.list);
         listView.setAdapter(new WordAdapter(this.mContext, words, getBackgroundColorId()));
         listView.setOnItemClickListener((parent, view, position, id) -> {
+            // this listener check all row not a single piece
             final Word word = words.get(position);
             releaseMediaPlayer();
             int res = this.mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
